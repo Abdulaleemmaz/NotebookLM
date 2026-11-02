@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="دليل شرح سلس وتفاعلي لمنصة Google NotebookLM">
+<title>دليل Google NotebookLM التفاعلي</title>
+<style>
+:root{--bg:#f5f7fb;--paper:#fff;--ink:#172033;--muted:#667085;--line:#e3e8ef;--accent:#456da8;--soft:#edf3fc;--shadow:0 7px 24px #1b31500c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.85}
+header{background:linear-gradient(120deg,#172b49,#5278ad);color:#fff;padding:34px 20px}.wrap{max-width:1120px;margin:auto;padding:0 18px}
+.kicker{font-size:13px;opacity:.82}.hero{font-size:clamp(25px,4vw,39px);font-weight:800;margin:6px 0}.intro{max-width:800px;color:#e8eef8}
+main{max-width:1120px;margin:22px auto;padding:0 18px;display:grid;grid-template-columns:245px 1fr;gap:18px}
+aside,.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+aside{padding:14px;position:sticky;top:14px;height:max-content}aside h3{font-size:15px;margin:4px 8px 12px}
+nav{display:grid;gap:5px}nav button{border:0;border-radius:9px;padding:10px;text-align:right;background:transparent;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}nav button:hover,nav button.active{background:var(--soft);color:#244f8d;font-weight:bold}
+.content{min-width:0}.panel{padding:22px;margin-bottom:15px}h2{font-size:23px;margin:0 0 5px}h3{font-size:17px;margin:22px 0 8px}p{margin:8px 0}.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:13px 0}
+.tile{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;text-align:right;cursor:pointer;color:var(--ink);font:inherit}.tile:hover,.tile.active{border-color:var(--accent);background:#f7faff}
+.tile strong{display:block}.tile small{color:var(--muted)}.tile,.detail{cursor:pointer}.tile::after{content:' ⓘ اضغط للتفاصيل';display:block;margin-top:7px;font-size:11px;color:var(--accent);opacity:.85}.detail:hover,.tile:hover{box-shadow:0 3px 12px #244f8d12}
+.detail{background:#f3f6fb;border:1px solid var(--line);border-radius:12px;padding:15px;margin-top:12px}
+.pill{display:inline-block;background:var(--soft);color:#244f8d;border-radius:30px;padding:3px 10px;font-size:12px}
+.steps{padding-right:22px}.steps li{margin:7px 0}
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin:12px 0}.flow div{padding:12px;border:1px solid var(--line);background:#f8faff;border-radius:11px;text-align:center}.arrow{text-align:center;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+a{color:#315f9f}.topline{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+footer{max-width:1120px;margin:0 auto 30px;padding:0 18px;color:var(--muted);font-size:12px}
+@media(max-width:760px){main{grid-template-columns:1fr}aside{position:static}nav{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:16px}}
+@media print{header{background:white;color:#111;border-bottom:2px solid #333}.intro{color:#333}main{display:block}aside{display:none}.panel{box-shadow:none;break-inside:avoid}button{display:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="kicker">دليل تدريبي تفاعلي • شرح خطوة بخطوة • دون اختبارات</div><div class="hero">تعرّف على Google NotebookLM</div><div class="intro">دليل سلس يشرح أجزاء المنصة ووظيفة كل جزء وطريقة استخدامه، مع أمثلة عملية في التعليم والبحث العلمي. تنقّل بين الأقسام أو اختر أي عنصر لاستكشاف شرحه.</div></div></header>
+<main>
+<aside><h3>أقسام الدليل</h3><nav id="nav"></nav><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><p class="muted">طريقة الاستخدام</p><p class="muted">اختر القسم من القائمة، ثم تنقّل بين البطاقات التوضيحية. لا توجد أسئلة أو اختبارات.</p><button class="tile" onclick="window.print()" style="width:100%">🖨️ طباعة / حفظ PDF</button></aside>
+<section class="content" id="content"></section>
+</main>
+<footer>دليل تعليمي مستقل. قد تتغير الواجهة والميزات والحدود بحسب تحديثات Google والخطة والمنطقة. راجع مركز المساعدة الرسمي للتحقق من أحدث التفاصيل.</footer>
+<script>
+const units=[
+["التعريف بالمنصة",`<p>Google NotebookLM هو مساعد بحث وتعلّم من Google، يعمل على المصادر التي تضيفها إلى دفترك. بدلاً من أن تبدأ بسؤال عام، تجمع ملفات ومواد موضوع معين، ثم تتفاعل معها لفهمها وتلخيصها وتحليلها وإنشاء مخرجات تعليمية.</p>
+<div class="grid"><div class="tile">📚<strong>مصادرك</strong><small>المحتوى الذي تضيفه إلى الدفتر.</small></div><div class="tile">💬<strong>محادثتك</strong><small>أسئلة وإجابات مرتبطة بالمصادر.</small></div><div class="tile">✨<strong>مخرجاتك</strong><small>ملخصات وخرائط وعروض وغيرها.</small></div></div>
+<h3>كيف يختلف عن أدوات أخرى؟</h3><table><tr><th>الأداة</th><th>الفكرة الأساسية</th></tr><tr><td>NotebookLM</td><td>تحليل مجموعة مصادر محددة أضفتها إلى الدفتر.</td></tr><tr><td>ChatGPT</td><td>مساعد عام للكتابة والتحليل والبرمجة والعمل مع الملفات.</td></tr><tr><td>Gemini</td><td>مساعد ذكاء اصطناعي عام متعدد الاستخدامات.</td></tr><tr><td>محرك البحث</td><td>اكتشاف صفحات ومعلومات على الإنترنت.</td></tr></table>
+<div class="detail"><b>مثال:</b> إذا كنت تدرس مقرر أمن الشبكات، يمكنك إنشاء دفتر للمقرر وإضافة المحاضرات والكتب، ثم طلب شرح المفاهيم ومقارنة البروتوكولات وإنشاء خريطة ذهنية للمحتوى.</div>`],
+["الواجهة الرئيسية",`<p>تتكون تجربة NotebookLM من عدة مناطق رئيسية. اختر أي جزء من النموذج المبسط أدناه لعرض شرح وظيفته.</p>
+<div class="grid">${[["🏠","الصفحة الرئيسية","home"],["📚","Sources — المصادر","sources"],["💬","Chat — المحادثة","chat"],["✨","Studio — الاستوديو","studio"],["🔗","Share — المشاركة","share"],["⚙️","الإعدادات","settings"]].map(x=>`<button class="tile" data-ui="${x[2]}">${x[0]}<strong>${x[1]}</strong><small>اضغط لعرض الشرح</small></button>`).join("")}</div><div class="detail" id="uiDetail"><b>اختر أحد أجزاء الواجهة</b><p>سيظهر هنا شرح مبسط لوظيفته.</p></div>
+<h3>إنشاء دفتر جديد</h3><ol class="steps"><li>افتح موقع NotebookLM وسجّل الدخول بحساب Google.</li><li>اختر إنشاء دفتر جديد Create notebook.</li><li>أدخل المصادر التي تريد العمل عليها.</li><li>ابدأ بطرح الأسئلة أو إنشاء المخرجات من Studio.</li></ol>
+<div class="detail">قد يختلف ترتيب الأزرار وأسماؤها قليلًا بحسب تحديثات الموقع أو حجم الشاشة.</div>`],
+["إضافة المصادر وإدارتها",`<p>قسم Sources هو أساس العمل في NotebookLM. المصدر هو ملف أو رابط أو محتوى تضيفه حتى يتمكن النظام من قراءته والاستناد إليه في الإجابات والمخرجات.</p>
+<h3>أنواع المصادر الشائعة</h3><div class="grid">${[["📕","PDF","الأبحاث والكتب والملفات"],["📄","المستندات","ملفات نصية ومستندات مدعومة"],["📊","الجداول","بيانات وجداول مدعومة"],["📽️","العروض","ملفات العروض التقديمية المدعومة"],["🌐","مواقع الويب","روابط صفحات الإنترنت"],["▶️","YouTube","فيديوهات عامة يتوفر لها نص ترجمة"],["🎙️","الصوت","ملفات صوتية مدعومة"],["🖼️","الصور","أنواع صور مدعومة بحسب الواجهة"]].map(x=>`<div class="tile">${x[0]}<strong>${x[1]}</strong><small>${x[2]}</small></div>`).join("")}</div>
+<h3>كيف تضيف مصدرًا؟</h3><ol class="steps"><li>افتح الدفتر المطلوب.</li><li>اضغط Add sources أو إضافة مصادر.</li><li>اختر الملف أو الرابط أو مصدر Google المتاح.</li><li>انتظر اكتمال الاستيراد.</li><li>افتح المصدر أو راجع اسمه للتأكد من إضافته بنجاح.</li></ol>
+<h3>إدارة المصادر</h3><ul><li>يمكنك تحديد المصادر التي تريد أن يعتمد عليها سؤالك.</li><li>افتح المصدر لمراجعة محتواه.</li><li>احذف المصادر غير المطلوبة.</li><li>قد تتوفر مزامنة لبعض ملفات Google Drive عند تحديث الأصل.</li></ul>
+<div class="detail"><b>ملاحظات مهمة:</b> دعم الملفات وحدود عددها وحجمها تختلف حسب الخطة وتتغير مع تحديثات الخدمة. صفحات الويب قد تستورد النص لا الصور والعناصر المضمنة. واستيراد فيديو YouTube يعتمد على توفر نص الترجمة وشروط المصدر.</div>`],
+["المحادثة وطرح الأسئلة",`<p>منطقة Chat هي مساحة التفاعل مع المصادر. تكتب فيها سؤالًا أو طلبًا، ثم تحصل على إجابة مرتبطة بالمحتوى المتاح في الدفتر.</p>
+<h3>ما الذي يمكنك طلبه؟</h3><div class="grid">${[["📝","التلخيص","تلخيص فصل أو مصدر في نقاط."],["🔎","استخراج المعلومات","استخراج تعريفات أو نتائج أو تواريخ."],["⚖️","المقارنة","مقارنة عدة مصادر أو مفاهيم."],["📊","إنشاء الجداول","تنظيم النتائج في صفوف وأعمدة."],["🎓","الشرح","شرح مفهوم بلغة مبسطة وأمثلة."],["📚","المراجعة","إعداد نقاط للمذاكرة والمراجعة."]].map(x=>`<div class="tile">${x[0]}<strong>${x[1]}</strong><small>${x[2]}</small></div>`).join("")}</div>
+<h3>مثال على سؤال فعّال</h3><div class="detail">بدلًا من كتابة: «اشرح الملف»، اكتب: «استخرج المفاهيم الرئيسة في هذا الفصل، واشرح كل مفهوم بلغة مناسبة لطلاب السنة الثانية، مع مثال من المصدر».</div>
+<h3>الاستشهادات</h3><p>قد تظهر في الإجابة إحالات إلى المواضع التي استندت إليها. اضغط على الإحالة لمراجعة النص الأصلي وسياقه. هذا يساعدك على تتبع مصدر المعلومة، لكنه لا يغني عن التحقق من دقتها.</p>`],
+["أدوات Studio",`<p>Studio هو قسم إنشاء المخرجات. بعد إضافة المصادر، يمكنك اختيار نوع المحتوى الذي تريد تحويل المعلومات إليه. اختر الأداة أدناه لقراءة شرحها.</p>
+<div class="grid" id="tools">${[["🎧","Audio Overview","audio"],["🎬","Video Overview","video"],["🌿","Mind Map","mind"],["🖥️","Slide Deck","slides"],["📄","Reports","reports"],["🗂️","Flashcards","cards"],["❓","Quiz","quiz"],["📊","Infographic","info"],["📋","Data Table","table"]].map(x=>`<button class="tile" data-tool="${x[2]}">${x[0]}<strong>${x[1]}</strong><small>عرض الشرح</small></button>`).join("")}</div><div class="detail" id="toolDetail">اختر أداة من البطاقات أعلاه لعرض شرحها وطريقة الاستفادة منها.</div>
+<h3>طريقة العمل العامة</h3><ol class="steps"><li>أضف المصادر المناسبة.</li><li>افتح Studio.</li><li>اختر المخرج المطلوب.</li><li>أدخل التعليمات أو الخيارات المتاحة.</li><li>راجع النتيجة ثم استخدم خيارات الحفظ أو المشاركة المتوفرة.</li></ol>
+<div class="detail">قد تختلف الأدوات المتاحة وخيارات التخصيص والتصدير بحسب الخطة والحساب والمنطقة والجهاز.</div>`],
+["الخريطة الذهنية Mind Map",`<p>الخريطة الذهنية ترتب محتوى الموضوع حول فكرة مركزية تتفرع منها المحاور والأفكار الفرعية. فائدتها أنها تعرض بنية الموضوع وعلاقات أجزائه بصريًا.</p>
+<h3>مثال توضيحي تفاعلي</h3><div class="detail" style="text-align:center;background:#edf3fc"><b>🧠 الموضوع الرئيسي: الذكاء الاصطناعي</b></div><div class="grid">${[["تعلم الآلة","التعلم الخاضع للإشراف • غير الخاضع • التعزيزي"],["التعلم العميق","الشبكات العصبية • CNN • Transformers"],["التطبيقات","الصحة • التعليم • الأمن السيبراني"],["التحديات","الخصوصية • التحيز • الموثوقية"]].map((x,i)=>`<div><button class="tile branch" data-branch="${i}"><strong>＋ ${x[0]}</strong><small>اضغط لعرض الفروع</small></button><div class="detail branchText" id="branch${i}" hidden>${x[1]}</div></div>`).join("")}</div>
+<h3>كيف تنشئ خريطة في NotebookLM؟</h3><ol class="steps"><li>أضف مصادر الموضوع إلى الدفتر.</li><li>افتح Studio.</li><li>اختر Mind Map إذا كانت متاحة في حسابك.</li><li>استعرض الموضوع الرئيس والفروع الناتجة.</li><li>افتح الفروع لمراجعة التفاصيل بحسب طريقة العرض.</li><li>تحقق من الأفكار بالرجوع إلى المصادر.</li></ol>
+<h3>استخداماتها في التعليم والبحث</h3><ul><li>تلخيص فصل دراسي.</li><li>ربط مفاهيم مقرر.</li><li>تصنيف موضوعات مراجعة الأدبيات.</li><li>تنظيم محاور مشروع تخرج.</li><li>مساعدة الطلاب على التخطيط للمذاكرة.</li></ul>
+<div class="detail">النموذج أعلاه للتوضيح فقط، وليس خريطة مولدة من NotebookLM. قد تختلف خيارات تعديل الخريطة أو تصديرها بحسب النسخة.</div>`],
+["المشاركة والعمل الجماعي",`<p>تساعد خيارات Share على مشاركة الدفتر أو بعض المخرجات مع الآخرين وفق الصلاحيات التي تتيحها الواجهة.</p><h3>خطوات المشاركة العامة</h3><ol class="steps"><li>افتح الدفتر الذي تريد مشاركته.</li><li>اضغط Share.</li><li>حدد الأشخاص أو نطاق الوصول المتاح.</li><li>راجع صلاحيات المشاهدة أو التحرير إن ظهرت.</li><li>أرسل الدعوة أو الرابط.</li><li>راجع المشاركة لاحقًا وعدّلها عند الحاجة.</li></ol>
+<h3>قبل مشاركة دفتر مع الزملاء</h3><div class="grid"><div class="tile">🔐<strong>الخصوصية</strong><small>تأكد من عدم وجود بيانات شخصية أو سرية.</small></div><div class="tile">📜<strong>حقوق المصادر</strong><small>تأكد من حقك في مشاركة المواد.</small></div><div class="tile">👥<strong>الصلاحيات</strong><small>حدد من يمكنه المشاهدة أو التحرير.</small></div></div>
+<div class="detail"><b>للاستخدام الجامعي:</b> لا ترفع بيانات الطلاب أو ملفات التقييم السرية أو الأبحاث غير المنشورة إلا بعد مراجعة سياسات الجامعة والخصوصية وشروط الخدمة.</div>`],
+["تطبيقات التعليم والبحث العلمي",`<p>يمكن استخدام NotebookLM في مهام تعليمية وبحثية متعددة. فيما يلي أمثلة عملية لطريقة تنظيم العمل.</p>
+<h3>في التدريس</h3><div class="grid"><div class="tile"><strong>تحويل المحاضرة إلى دليل مذاكرة</strong><small>أضف الشرائح والقراءات واطلب الأهداف والمفاهيم والتعاريف والأمثلة.</small></div><div class="tile"><strong>إعداد أسئلة تدريبية</strong><small>اطلب أسئلة من مستويات معرفية مختلفة، ثم راجعها قبل استخدامها.</small></div><div class="tile"><strong>خريطة ذهنية للمقرر</strong><small>اجمع محاضرات المقرر واطلب تنظيم الموضوعات الرئيسة والفرعية.</small></div><div class="tile"><strong>عرض تقديمي</strong><small>حوّل المحتوى إلى عرض منظم ثم راجع دقته وملاءمته للطلاب.</small></div></div>
+<h3>في البحث العلمي</h3><div class="grid"><div class="tile"><strong>تحليل الدراسات السابقة</strong><small>استخراج الهدف والمنهجية والعينة والنتائج والقيود.</small></div><div class="tile"><strong>مقارنة الأبحاث</strong><small>تنظيم أوجه التشابه والاختلاف في جدول.</small></div><div class="tile"><strong>استكشاف موضوع بحثي</strong><small>تحديد المحاور التي تحتاج إلى مراجعة أوسع.</small></div><div class="tile"><strong>مراجعة أدبيات أولية</strong><small>تنظيم المراجع والأفكار تمهيدًا للتحليل المنهجي.</small></div></div>
+<div class="detail"><b>تنبيه بحثي:</b> لا يكفي تحليل مجموعة ملفات لإثبات فجوة بحثية. يجب البحث المنهجي في قواعد البيانات والتحقق من حداثة الأدبيات وشمولها.</div>`],
+["أفضل الممارسات والقيود",`<h3>للحصول على نتائج أفضل</h3><div class="grid"><div class="tile"><strong>مصادر موثوقة</strong><small>استخدم نسخًا صحيحة وحديثة وواضحة.</small></div><div class="tile"><strong>تعليمات محددة</strong><small>حدد المطلوب والجمهور وشكل الإجابة.</small></div><div class="tile"><strong>تحقق من الاستشهاد</strong><small>افتح المصدر الأصلي واقرأ السياق.</small></div><div class="tile"><strong>احمِ البيانات</strong><small>راجع سياسات الخصوصية قبل رفع الملفات.</small></div><div class="tile"><strong>احترم الحقوق</strong><small>تحقق من تراخيص المواد قبل استخدامها أو مشاركتها.</small></div></div>
+<h3>قيود يجب معرفتها</h3><ul><li>قد يخطئ النموذج في الفهم أو التلخيص أو الربط.</li><li>قد لا يستورد بعض الملفات أو محتواها كاملًا.</li><li>قد لا يتضمن استيراد صفحات الويب الصور والعناصر المضمّنة.</li><li>تختلف حدود المصادر والميزات حسب الحساب والمنطقة والخطة.</li><li>المخرجات الصوتية والمرئية قد لا تعرض جميع التفاصيل.</li><li>تحليل الدراسات لا يغني عن تقييم جودة المنهجية والبيانات.</li></ul>
+<h3>متى تستخدم أداة أخرى؟</h3><table><tr><th>المهمة</th><th>الأداة المناسبة</th></tr><tr><td>فهم مجموعة ملفات ومراجع</td><td>NotebookLM</td></tr><tr><td>كتابة وصياغة عامة</td><td>ChatGPT أو Gemini</td></tr><tr><td>اكتشاف أحدث الأبحاث</td><td>قواعد البيانات العلمية</td></tr><tr><td>تحليل إحصائي متقدم</td><td>R أو Python أو SPSS</td></tr></table>`],
+["قاموس المصطلحات والمصادر",`<p>ابحث عن المصطلح الإنجليزي أو العربي لعرض معناه.</p><input type="search" id="glossarySearch" placeholder="اكتب المصطلح هنا..."><div class="grid" id="glossary">${[["Notebook","الدفتر","مساحة عمل تجمع مصادر موضوع معين ومحادثاته ومخرجاته."],["Sources","المصادر","الملفات والروابط التي يستند إليها الدفتر."],["Studio","الاستوديو","منطقة إنشاء المخرجات التعليمية."],["Audio Overview","الملخص الصوتي","مناقشة صوتية مولدة حول محتوى المصادر."],["Video Overview","الملخص المرئي","شرح مرئي مولد من المصادر."],["Mind Map","الخريطة الذهنية","تمثيل بصري للأفكار والعلاقات."],["Slide Deck","عرض الشرائح","مجموعة شرائح تعرض محتوى المصادر."],["Flashcards","البطاقات التعليمية","بطاقات سؤال وجواب للمراجعة."],["Quiz","الاختبار","أسئلة تدريبية لقياس الفهم."],["Infographic","الإنفوجرافيك","عرض بصري موجز للمعلومات."],["Data Table","جدول البيانات","تنظيم المعلومات في صفوف وأعمدة."],["Citation","الاستشهاد","إحالة تربط الإجابة بالمصدر."]].map(x=>`<div class="tile term" data-term="${(x[0]+' '+x[1]).toLowerCase()}"><strong>${x[0]} — ${x[1]}</strong><small>${x[2]}</small></div>`).join("")}</div>
+<h3>روابط رسمية</h3><ul><li><a href="https://notebooklm.google.com/" target="_blank" rel="noopener">فتح Google NotebookLM</a></li><li><a href="https://support.google.com/gemininotebook/" target="_blank" rel="noopener">مركز مساعدة NotebookLM</a></li><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/" target="_blank" rel="noopener">أخبار NotebookLM من Google</a></li></ul>
+<div class="detail">آخر مراجعة تحريرية للدليل: 2 نوفمبر 2026. راجع الروابط الرسمية للتحقق من أحدث الميزات والحدود.</div>`]
+];
+const nav=document.getElementById('nav'),content=document.getElementById('content');
+units.forEach((u,i)=>{let b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' · '+u[0];b.onclick=()=>render(i);nav.appendChild(b)});
+function render(i){nav.querySelectorAll('button').forEach((b,j)=>b.classList.toggle('active',i===j));content.innerHTML=`<div class="panel"><div class="topline"><span class="pill">القسم ${String(i+1).padStart(2,'0')} من 10</span><span class="muted">دليل شرح واستكشاف</span></div><h2>${units[i][0]}</h2>${units[i][1]}<div class="topline" style="margin-top:24px"><button class="tile" id="prev" ${i===0?'disabled':''}>← القسم السابق</button><button class="tile" id="next">${i===9?'العودة إلى البداية':'القسم التالي ←'}</button></div></div>`;
+document.getElementById('prev').onclick=()=>render(Math.max(0,i-1));document.getElementById('next').onclick=()=>render(i===9?0:i+1);wire()}
+function wire(){
+const ui={home:['الصفحة الرئيسية','تستعرض دفاترك الحالية، وتتيح إنشاء دفتر جديد وفتح الدفاتر السابقة.'],sources:['Sources — المصادر','تضيف منها الملفات والروابط، وتختار المصادر التي تريد استخدامها في المحادثة.'],chat:['Chat — المحادثة','تطرح الأسئلة وتحصل على إجابات مرتبطة بمحتوى الدفتر ومصادره.'],studio:['Studio — الاستوديو','تنشئ منه المخرجات مثل الخرائط والملخصات والاختبارات.'],share:['Share — المشاركة','تتحكم في مشاركة الدفتر والصلاحيات المتاحة.'],settings:['Settings — الإعدادات','تجد خيارات الحساب والتفضيلات التي توفرها الواجهة.']};
+document.querySelectorAll('[data-ui]').forEach(b=>b.onclick=()=>{let x=ui[b.dataset.ui];document.getElementById('uiDetail').innerHTML='<b>'+x[0]+'</b><p>'+x[1]+'</p>'});
+const tools={audio:['🎧 Audio Overview — الملخص الصوتي','ينشئ نقاشًا صوتيًا شبيهًا بالبودكاست حول محتوى المصادر. يفيد في الاستماع إلى الأفكار ومراجعتها.','مثال: تحويل محاضرة عن أمن الشبكات إلى نقاش صوتي يشرح المفاهيم الأساسية.'],video:['🎬 Video Overview — الملخص المرئي','ينشئ شرحًا مرئيًا يعتمد على محتوى المصادر، مع سرد وعناصر بصرية بحسب خيارات الإنشاء المتاحة.','مثال: إعداد شرح مرئي لمراحل تطور الحوسبة.'],mind:['🌿 Mind Map — الخريطة الذهنية','يعرض بنية الموضوع في شكل فكرة رئيسة وفروع وأفكار فرعية مترابطة.','مثال: خريطة ذهنية لفصل عن الذكاء الاصطناعي.'],slides:['🖥️ Slide Deck — عرض الشرائح','يحول محتوى المصادر إلى عرض تقديمي منظم يمكن مراجعته واستخدامه بعد التحقق من دقته.','مثال: إعداد عرض لمحاضرة جامعية.'],reports:['📄 Reports — التقارير','يساعد على إنشاء تقارير أو أدلة دراسية بالاعتماد على المصادر والأنماط المتاحة.','مثال: إعداد دليل مراجعة لفصل دراسي.'],cards:['🗂️ Flashcards — البطاقات التعليمية','ينشئ بطاقات سؤال وجواب للمراجعة والاستذكار.','مثال: بطاقات لمصطلحات أمن المعلومات.'],quiz:['❓ Quiz — الاختبارات','ينشئ أسئلة تدريبية مبنية على المصادر لقياس الفهم والمراجعة.','مثال: أسئلة حول مفاهيم الشبكات.'],info:['📊 Infographic — الإنفوجرافيك','يحول المعلومات إلى عرض بصري موجز يسهل استيعابه ومشاركته.','مثال: تلخيص أنواع الهجمات السيبرانية بصريًا.'],table:['📋 Data Table — جدول البيانات','ينظم المعلومات المستخرجة في جدول لتسهيل المقارنة والتحليل.','مثال: مقارنة الدراسات من حيث المنهجية والنتائج.']};
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{let x=tools[b.dataset.tool];document.getElementById('toolDetail').innerHTML='<b>'+x[0]+'</b><p>'+x[1]+'</p><p><b>مثال عملي:</b> '+x[2]+'</p>'});
+document.querySelectorAll('[data-branch]').forEach(b=>b.onclick=()=>{let el=document.getElementById('branch'+b.dataset.branch);el.hidden=!el.hidden;b.querySelector('strong').textContent=(el.hidden?'＋ ':'－ ')+b.querySelector('strong').textContent.slice(2)});
+let s=document.getElementById('glossarySearch');if(s)s.oninput=()=>document.querySelectorAll('.term').forEach(t=>t.hidden=!t.dataset.term.includes(s.value.toLowerCase().trim()));
+// البطاقات المعلوماتية الثابتة: افتح شرحًا إضافيًا عند الضغط عليها.
+document.querySelectorAll('.tile:not(button):not([data-ui]):not([data-tool]):not([data-branch]):not(.term)').forEach(tile=>{
+  tile.addEventListener('click',()=>{
+    let detail=tile.nextElementSibling;
+    if(!detail || !detail.classList.contains('tile-expanded-detail')){
+      detail=document.createElement('div');
+      detail.className='detail tile-expanded-detail';
+      tile.insertAdjacentElement('afterend',detail);
+    }
+    const heading=tile.querySelector('strong')?.innerText || tile.innerText.trim();
+    const description=tile.querySelector('small')?.innerText || '';
+    const isOpen=detail.dataset.open==='yes';
+    if(isOpen){detail.hidden=true;detail.dataset.open='no';}
+    else{
+      detail.innerHTML='<b>'+heading+'</b><p>'+description+'</p><p>يمكنك استخدام هذا الجزء ضمن الدفتر لفهم المحتوى أو تنظيمه أو الرجوع إليه أثناء العمل. جرّب ربطه بالمصادر ذات الصلة، ثم راجع النتيجة في سياق موضوعك.</p>';
+      detail.hidden=false;detail.dataset.open='yes';
+    }
+  });
+});
+}
+
+render(0);
+</script>
+</body></html>
